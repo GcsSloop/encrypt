@@ -195,7 +195,7 @@ compile 'com.gcssloop.util:encrypt:1.0.0'
 
 #### v1.0.0
 
-添加几本的加密解密工具和辅助工具类。
+添加基本的加密解密工具和辅助工具类。
 
 - base
   - **Base64**
