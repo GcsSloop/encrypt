@@ -186,7 +186,7 @@ allprojects {
 2. 在需要引用的 module 添加具体依赖。
 
 ```groovy
-compile 'com.gcssloop.util:encrypt:1.0.0'
+compile 'com.gcssloop.util:encrypt:1.0.0@aar'
 ```
 
 
