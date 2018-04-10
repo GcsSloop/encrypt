@@ -218,22 +218,33 @@ public class RSAUtil {
             cipher.init(Cipher.ENCRYPT_MODE, key);
 
             while (inputLen - offSet > 0) {
-                cache = cipher.doFinal(data, offSet, inputLen - offSet > 117 ? 117 : inputLen -
-                        offSet);
+                if (inputLen - offSet > 117) {
+                    cache = cipher.doFinal(data, offSet, 117);
+                } else {
+                    cache = cipher.doFinal(data, offSet, inputLen - offSet);
+                }
+
                 out.write(cache, 0, cache.length);
+                out.flush();
                 i++;
                 offSet = i * 117;
             }
         } else {
             cipher.init(Cipher.DECRYPT_MODE, key);
-
             while (inputLen - offSet > 0) {
                 if (inputLen - offSet > 128) {
                     cache = cipher.doFinal(data, offSet, 128);
+                    // 当最前面的数据是0，解密工具会错误的认为这是padding，因此导致长度不正确
+                    if (cache.length < 117) {
+                        byte[] temp = new byte[117];
+                        System.arraycopy(cache, 0, temp, 117 - cache.length, cache.length);
+                        cache = temp;
+                    }
                 } else {
                     cache = cipher.doFinal(data, offSet, inputLen - offSet);
                 }
                 out.write(cache, 0, cache.length);
+                out.flush();
                 i++;
                 offSet = i * 128;
             }

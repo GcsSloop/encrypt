@@ -186,12 +186,20 @@ allprojects {
 2. 在需要引用的 module 添加具体依赖。
 
 ```groovy
-compile 'com.gcssloop.util:encrypt:1.0.0'
+compile 'com.gcssloop.util:encrypt:1.0.2'
 ```
 
 
 
 ### 版本信息
+
+#### v1.0.2
+
+尝试修复 RSAUtils 加密图片时问题。
+
+#### v1.0.1
+
+降低最低版本兼容性。
 
 #### v1.0.0
 
